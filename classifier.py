@@ -130,6 +130,10 @@ epochs = range(1, len(acc) + 1)
 
 CNN.save(os.path.join(os.path.dirname(__file__),"models","train_model.h5"))
 
+
+    
+    
+    
 plt.title('Training and validation accuracy')
 plt.plot(epochs, acc, 'red', label='Training acc')
 plt.plot(epochs, val_acc, 'blue', label='Validation acc')
