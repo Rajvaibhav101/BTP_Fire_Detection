@@ -17,7 +17,8 @@ print("Loaded model from disk")
 
 
 
-classes = {0: 'Fire', 1: 'No Fire'}
+classes = {0: 'Fire', 
+           1: 'No Fire'}
 
 def load_image(data_path):
     img = cv2.imread(data_path)
@@ -29,9 +30,13 @@ def load_image(data_path):
 def predict(image_path):
     img = load_image(image_path)
     probabilities = model.predict(np.asarray([img]))[0]
-    class_idx = np.argmax(probabilities)
-    
-    return {classes[class_idx]: probabilities[class_idx]}
+    print(probabilities)
+    if probabilities[0]<=0.50:
+        class_idx = 0
+        return {classes[class_idx]: 1-probabilities[0]}
+    else:
+        class_idx = 1    
+        return {classes[class_idx]: probabilities[0]}
 
 top=tk.Tk()
 top.geometry('800x600')
